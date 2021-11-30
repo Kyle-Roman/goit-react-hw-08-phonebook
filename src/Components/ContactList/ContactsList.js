@@ -1,17 +1,24 @@
 import React from "react";
-// import { connect } from "react-redux";
-// import phonebookActions from '../redux/actions';
+import { useDispatch, useSelector } from "react-redux";
+import * as selectors from '../../redux/selector';
+import * as reducers from '../../redux/reducers';
 import s from './ContactList.module.css';
 
-export default function ContactsList({contacts, onDelete}) {
+export default function ContactsList() {
+  const contacts = useSelector(selectors.getContacts);
+  const dispatch = useDispatch();
+
+  const onDelete = (id) =>
+    dispatch(reducers.deleteContact(id));
+
   return (
     <div>
       <ul className={s.list}>
-                {contacts.map((contact) => (
-                  <li key={contact.id} className={s.list_item}>
-                    <span className={s.name}>{contact.name}</span>
-                    <span className={s.number}>{contact.phone}</span>
-                    <button type="button" id={contact.id} onClick={() => onDelete(contact.id)} className={s.button}>Delete</button>
+                {contacts.map(({ id, name, number }) => (
+                  <li key={id} className={s.list_item}>
+                    <span className={s.name}>{name}</span>
+                    <span className={s.number}>{number}</span>
+                    <button type="button" id={id} onClick={() => onDelete(id)} className={s.button}>Delete</button>
                   </li>
                   
                 )

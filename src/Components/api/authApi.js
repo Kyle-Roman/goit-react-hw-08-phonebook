@@ -5,7 +5,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://connections-api.herokuapp.com' }),
   tagTypes:['users'],
   endpoints: (builder) => ({
-    getUser: builder.query({
+    getUser: builder.mutation({
       query: (user) => ({
         url: `/users/current`,
         method: 'POST',
@@ -32,7 +32,7 @@ export const authApi = createApi({
         url: `/users/login`,
         method: 'POST',
         body: {
-          name: usersData.name,
+          email: usersData.email,
           password: usersData.password,
         },
       }),

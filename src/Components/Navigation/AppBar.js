@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { authSelectors } from "../../redux/auth";
 import Navigation from "./Navigation";
-import UserBar from "./UserBar";
+import UserBar from "../UserMenu/UserBar";
 import AuthNavigation from "./AuthNavigation";
 import s from './Navigation.module.css';
 

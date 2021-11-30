@@ -1,25 +1,23 @@
 import React, { useState} from "react";
 import { toast } from 'react-toastify';
-// import phonebookActions from "../redux/actions";
-// import { connect } from "react-redux";
-import { useAddContactMutation } from '../api/api';
+import * as reducers from '../../redux/reducers';
+import { useDispatch } from "react-redux";
 import s from './Form.module.css'
 
 export default function Form() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
+   const dispatch = useDispatch();
 
-  const [addContact, {isLoading}] = useAddContactMutation();
-  
   const handleInput = e => {
-    const {name, value} = e.target;
+    const {name, value} = e.currentTarget;
 
     switch (name) {
       case 'name':
         setName(value);
         break;
       case 'number':
-        setPhone(value);
+        setNumber(value);
         break;
       default:
         return;
@@ -28,7 +26,7 @@ export default function Form() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addContact({ name, phone });
+    dispatch(reducers.addContact({ name, number }));
     reset();
     toast.success('Contact added!', {
       position: "top-center",
@@ -43,7 +41,7 @@ export default function Form() {
 
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
     }
 
   return (
@@ -66,7 +64,7 @@ export default function Form() {
               <input
                 type="tel"
                 name="number"
-                value={phone}
+                value={number}
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                 onChange={handleInput}
@@ -75,7 +73,7 @@ export default function Form() {
                 className={s.input}
               />
             </label>
-              <button type="submit" disabled={isLoading} className={s.button} title='Добавить новый контакт'>Add contact</button>
+              <button type="submit" className={s.button} title='Добавить новый контакт'>Add contact</button>
       </form>
       
     </div>

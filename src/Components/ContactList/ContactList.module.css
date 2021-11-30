@@ -14,14 +14,21 @@
 
 .list_item {
   display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid green;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(221, 253, 221);
+  padding: 10px;
 }
 
-.list_item:nth-child(2n) {
-  background-color: rgb(221, 253, 221);
+.name {
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.number {
+  color: rgb(221, 253, 221);
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .button {
@@ -29,9 +36,14 @@
   height: 25px;
   border: none;
   border-radius: 3px;
-  color: #fff;
-  background-color: green;
   font-size: 14px;
   font-weight: 500;
+  background-color: rgb(221, 253, 221);
   cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background-color: red;
+  color: #fff;
 }
